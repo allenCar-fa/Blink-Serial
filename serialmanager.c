@@ -40,6 +40,7 @@ int setup_serial(int baud_rate, int block){
     if(tcsetattr(fd, TCSAFLUSH, &config) < 0)
 	return -1;
     tcflush(fd, TCIOFLUSH);
+
     return 0;
 }
 
