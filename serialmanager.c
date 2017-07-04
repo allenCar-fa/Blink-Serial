@@ -66,6 +66,6 @@ ssize_t serial_write(char *buff,int buff_size){
     ssize_t err;
     err = write(fd,buff,buff_size);
     tcdrain(fd);
-    // tcflush(fd, TCOFLUSH);
+    fsync(fd);
     return err;
 }
