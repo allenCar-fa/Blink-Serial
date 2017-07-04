@@ -19,13 +19,17 @@ int setup_serial(int baud_rate, int block){
 	fd = open(PORT,O_RDWR | O_NOCTTY | O_NONBLOCK);
     else
 	fd = open(PORT,O_RDWR | O_NOCTTY);
-    printf("Port openned\n");
+  
     if(fd == -1)
 	return -1;
+
+      printf("Port openned\n");
     
     if(tcgetattr(fd,&config) < 0 )
 	return -1;
-  
+
+    printf("attribute set \n");
+    
     config.c_iflag &= ~(IGNBRK | BRKINT | ICRNL |
                      INLCR | PARMRK | INPCK | ISTRIP | IXON);
     config.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
