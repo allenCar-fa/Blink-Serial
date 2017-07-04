@@ -19,13 +19,13 @@ int setup_serial(int baud_rate, int block){
 	fd = open(PORT,O_RDWR | O_NOCTTY | O_NONBLOCK);
     else
 	fd = open(PORT,O_RDWR | O_NOCTTY);
-
+    printf("Port openned\n");
     if(fd == -1)
 	return -1;
     
     if(tcgetattr(fd,&config) < 0 )
 	return -1;
-
+  
     config.c_iflag &= ~(IGNBRK | BRKINT | ICRNL |
                      INLCR | PARMRK | INPCK | ISTRIP | IXON);
     config.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
@@ -37,10 +37,13 @@ int setup_serial(int baud_rate, int block){
     if(cfsetispeed(&config, BAUD_RATE) < 0 || cfsetospeed(&config, BAUD_RATE) < 0)
 	return -1;
 
+    printf("speed set\n");
+    
     if(tcsetattr(fd, TCSAFLUSH, &config) < 0)
 	return -1;
     tcflush(fd, TCIOFLUSH);
 
+    printf("conf set\n");
     return 0;
 }
 
@@ -59,6 +62,6 @@ ssize_t serial_write(char *buff,int buff_size){
     ssize_t err;
     err = write(fd,buff,buff_size);
     tcdrain(fd);
-    tcflush(fd, TCOFLUSH);
+    // tcflush(fd, TCOFLUSH);
     return err;
 }

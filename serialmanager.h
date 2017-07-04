@@ -1,6 +1,7 @@
 #ifndef __SERIAL_MANAGER__
 #define __SERIAL_MANAGER__
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <termios.h>
 #include <unistd.h>
