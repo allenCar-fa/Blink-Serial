@@ -38,7 +38,7 @@ int setup_serial(int baud_rate, int block){
     config.c_cc[VMIN]  = 1;
     config.c_cc[VTIME] = 0;
 
-    if(cfsetispeed(&config, BAUD_RATE) < 0 || cfsetospeed(&config, BAUD_RATE) < 0)
+    if(cfsetispeed(&config, BAUD_RATE) < 0 && cfsetospeed(&config, BAUD_RATE) < 0)
 	return -1;
 
     printf("speed set\n");
