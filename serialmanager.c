@@ -64,8 +64,10 @@ ssize_t serial_read(char *buff,int buff_size){
 //returns -1 if error occured and else for numbered of written characters
 ssize_t serial_write(char *buff,int buff_size){
     ssize_t err;
+
+    tcflush(fd,TCOFLUSH);
     err = write(fd,buff,buff_size);
-    tcdrain(fd);
+    //tcdrain(fd);
     fsync(fd);
     return err;
 }

@@ -15,5 +15,6 @@ int main(){
     while(1)
     {	serial_read(&h,1);
 	printf("%c\n",h);
+	serial_write(&h, 1);
     }
 }
